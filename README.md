@@ -13,6 +13,24 @@ Paper: [TBD](TBD)
 Detecting out-of-distribution (OOD) examples is an important task for deploying reliable machine learning models in safety-critial applications. 
 While post-hoc methods based on the Mahalanobis distance applied to pre-logit features are among the most effective for ImageNet-scale OOD detection, their performance varies significantly across models. We connect this inconsistency to strong variations in feature norms, indicating severe violations of the Gaussian assumption underlying the Mahalanobis distance estimation. We show that simple $\ell_2$-normalization of the features mitigates this problem effectively, aligning better with the premise of normally distributed data with shared covariance matrix. Extensive experiments on 44 models across diverse architectures and pretraining schemes show that $\ell_2$-normalization improves the conventional Mahalanobis distance-based approaches significantly and consistently, and outperforms other recently proposed OOD detection methods.
 
+
+<table>
+  <tr>
+    <td>
+      <img src="assets/exp-obs-fnorm-swinv2_base_window12to24_192to384.ms_in22k_ft_in1k(1).png" alt="Left Image" height="300"/>
+    </td>
+    <td>
+      <img src="assets/fnorm-smaha-swinv2_base_window12to24_192to384.ms_in22k_ft_in1k.png" alt="Left Image" height="300"/>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align: center; padding-top: 10px; max-width: 600px;">
+      <b>Left: The Gaussian assumption may be severely violated.</b> We simulate how the feature norms per class would be distributed if they were sampled from Gaussians with the means and covariance matrix used for the Mahalanobis distance estimation. The feature norm distribution observed in practice differs strongly, as both the average norms across classes and the norms within each class vary much stronger than expected.<br><br>
+      <b>Right: Normalization improves dependence of OOD score on feature norm.</b> For non-normalized features, the smaller the feature norm, the smaller the Mahalanobis OOD score, irrespective of whether a sample is ID or not. OOD samples with small feature norms are systematically classified as ID.  After normalization, OOD samples with small feature norms can be detected, and OOD detection is significantly improved.
+    </td>
+  </tr>
+</table>
+
 ## **Using this repository**:
 ````
 # install packages
@@ -77,6 +95,10 @@ python3 evaluate.py --model_name swinv2_base_window12to24_192to384.ms_in22k_ft_i
 Note that this takes considerable time since on a model's first run it requires a forward pass over the whole ImageNet-1K train set to extract the train features. Specifying `--method all` evaluates all methods. 
 
 ## Results
+
+
+Normalizing the features improves Mahalanobis-based OOD detection consistently, and Mahalanobis with normalized features leads to the best methods on average, and also for most models individually. Shown are FPR values on NINCO.
+![NINCO-big-table.png](assets/NINCO-big-table.png)
 
 ## Citation
 For citing our paper, we would appreciate using the following bibtex entry (this will be updated once the ICML 2025 proceedings are public):
