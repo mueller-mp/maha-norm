@@ -36,7 +36,7 @@ class OODScore:
     'nnguide10',
     'Relative_Mahalanobis_norm',
     'neco_l',
-    'gmm',
+    # 'gmm',
     'nan',
     'fdbd',
     'gen',

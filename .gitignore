@@ -2,3 +2,7 @@ NINCO/cache*
 NINCO/NINCO
 NINCO/model_weights/
 NINCO/data/__pycache__
+OpenOOD/results
+OpenOOD/data/images_largescale
+OpenOOD/data/images_classic
+*__pycache__*
