@@ -42,6 +42,10 @@ pip install libmr==0.1.9
 cd NINCO
 wget https://zenodo.org/record/8013288/files/NINCO_all.tar.gz?download=1 -O NINCO_all.tar.gz
 tar -xvzf NINCO_all.tar.gz
+
+# go to OpenOOD folder and download data
+cd ../OpenOOD
+python ./scripts/download/download.py --contents 'datasets' 'checkpoints' --datasets 'ood_v1.5' --checkpoints 'ood_v1.5' --save_dir './data' './results' --dataset_mode 'benchmark'
 ````
 
 Then please edit `NINCO/data/paths_config.py` to set `ninco_folder` to the folder where the downloaded NINCO datasets have been extracted (containing the folders `NINCO_OOD_classes`,  `NINCO_OOD_unit_tests` and  `NINCO_popular_datasets_subsamples`).
@@ -91,13 +95,17 @@ def evaluate_Mahalanobis_norm(feature_id_train, feature_id_val, feature_ood, tra
 ```
 
 ## Run evaluation
-Evaluate a SwinV2-base model with Mahalanobis++. 
+Evaluate an ImageNet SwinV2-base model with Mahalanobis++ on NINCO by running the following command from the `NINCO` folder: 
 ````
 python3 evaluate.py --model_name swinv2_base_window12to24_192to384.ms_in22k_ft_in1k --method all --dataset NINCO --batch_size 128
 ````
-Note that this takes considerable time since on a model's first run it requires a forward pass over the whole ImageNet-1K train set to extract the train features. Specifying `--method all` evaluates all methods. 
+Note that this takes considerable time since on a model's first run it requires a forward pass over the whole ImageNet-1K train set to extract the train features. Specifying `--method all` evaluates all methods. For the other OpenOOD datasets, you can specify `--dataset openood-datasets --dataset_paths_prefix ./OpenOOD/data/`. 
 
-## Results
+The CIFAR models (currently only the ResNet models) can be evaluated directly via the OpenOOD benchmark (run from `OpenOOD` folder):
+````
+python eval_cifar.py
+````
+## ImageNet Results
 
 
 Normalizing the features improves Mahalanobis-based OOD detection consistently, and Mahalanobis with normalized features leads to the best methods on average, and also for most models individually. Shown are FPR values on NINCO.
