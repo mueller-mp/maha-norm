@@ -50,7 +50,10 @@ Also, set `repo_path` to the absolute path of the NINCO repository, and specify 
 ## Method
 The usual Mahalanobis distance for OOD detection, but with normalized features:
 ```python
-def evaluate_Mahalanobis_norm(feature_id_train, feature_id_val, feature_ood, train_labels, path):
+import numpy as np
+from sklearn.covariance import EmpiricalCovariance
+
+def evaluate_Mahalanobis_norm(feature_id_train, feature_id_val, feature_ood, train_labels):
     """
     feature_id_train (numpy array): ID train samples, (n_train x d).
     feature_id_val (numpy array): ID val samples, (n_val x d).
