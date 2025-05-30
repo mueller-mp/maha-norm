@@ -1,4 +1,4 @@
-# [Mahalanobis++: Feature Normalization as the Missing Ingredient for Reliable OOD Detection](TBD)
+# [Mahalanobis++: Improving OOD Detection via Feature Normalization](https://arxiv.org/abs/2505.18032)
 
 Maximilian Müller, Matthias Hein
 
@@ -6,7 +6,7 @@ Maximilian Müller, Matthias Hein
 **Tübingen AI Center**
 
 
-Paper: [TBD](TBD)  
+Paper: [https://arxiv.org/abs/2505.18032](https://arxiv.org/abs/2505.18032)  
 
 ## Paper abstract
 
@@ -114,7 +114,14 @@ Normalizing the features improves Mahalanobis-based OOD detection consistently, 
 ## Citation
 For citing our paper, we would appreciate using the following bibtex entry (this will be updated once the ICML 2025 proceedings are public):
 ```
-TBD
+@inproceedings{
+mueller2025mahalanobispp,
+title={Mahalanobis++: Improving OOD Detection via Feature Normalization},
+author={Maximilian Mueller and Matthias Hein},
+booktitle={ICML},
+year={2025},
+url={https://arxiv.org/abs/2505.18032}
+}
 ```
 Since this repo is based on the NINCO repo and the OpenOOD repo, please consider citing their work, too:
 
